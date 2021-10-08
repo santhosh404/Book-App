@@ -1,0 +1,130 @@
+{%extends 'base.html'%}
+
+
+
+{% block title %} Django-Signup {% endblock %}
+
+{% block styles %}
+<style>
+  body {
+    font-family: "Poppins", sans-serif;
+  }
+  .form {
+    margin: auto;
+    margin-top: 100px;
+    max-width: 500px;
+    height: auto;
+    background-color: #fff;
+    padding: 20px;
+    text-align: center;
+    border-radius: 10px;
+    -webkit-box-shadow: -1px 1px 12px 3px #EEEEEE ;
+    box-shadow: -1px 1px 10px 3px #EEEEEE;
+  }
+  .form h2{
+    font-family: 'Poppins', sans-serif !important;
+  }
+  .form .email {
+    display: block;
+    margin: 35px auto;
+    border: none;
+    width: 300px;
+    border-bottom: 1px solid darkgray;
+    background-color: #fff;
+  }
+  .form .username {
+    display: block;
+    margin: 35px auto;
+    border: none;
+    width: 300px;
+    border-bottom: 1px solid darkgray;
+    background-color: #fff;
+  }
+  .form .password {
+    display: block;
+    margin: 35px auto;
+    border: none;
+    width: 300px;
+    border-bottom: 1px solid darkgray;
+    background-color: #fff;
+  }
+  .form .passwordconfirm{
+    display: block;
+    margin-top: 20px;
+    margin-bottom: auto;
+    margin-left: auto;
+    margin-right: auto;
+    border: none;
+    width: 300px;
+    border-bottom: 1px solid darkgray;
+    background-color: #fff;
+  }
+  .myButton {
+    box-shadow: inset 0px 1px 0px 0px #bbdaf7;
+    background: linear-gradient(to bottom, #79bbff 5%, #378de5 100%);
+    background-color: #79bbff;
+    border-radius: 6px;
+    border: 1px solid #84bbf3;
+    display: inline-block;
+    cursor: pointer;
+    color: #ffffff;
+    font-family: Arial;
+    font-size: 15px;
+    font-weight: bold;
+    padding: 6px 24px;
+    margin-top: 20px;
+    text-decoration: none;
+    text-shadow: 0px 1px 0px #528ecc;
+  }
+  .myButton:hover {
+    background: linear-gradient(to bottom, #378de5 5%, #79bbff 100%);
+    background-color: #378de5;
+  }
+  .myButton:active {
+    position: relative;
+    top: 1px;
+  }
+  
+  .background {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: -1;
+  }
+</style> {% endblock %}
+
+{% block body %} 
+
+
+
+<div class="form">
+  {% if email_error %}
+<div class="alert alert-danger" role="alert">
+    {{email_error}}
+  </div>
+{% endif %}
+{% if pass_error %}
+<div class="alert alert-danger" role="alert">
+    {{pass_error}}
+  </div>
+{% endif %}
+  <h2>Sign Up</h2>
+<form action="" method="POST">
+    {% csrf_token %}
+    <input type="email" name="email" id="" placeholder="Email" required class="email">
+    <input type="text" name="username" id="" placeholder="Username" required class="username">
+    <input type="password" name="password" id="" placeholder="Password" required class="password">
+    <input type="password" name="password1" id=""  placeholder="Password Confirmation" required class="passwordconfirm">
+    <button type="submit" name="" id="" class="myButton">Sign Up</button>
+</form>
+<br>
+
+<p>Already Have an account? <span><a href="{% url 'login' %}">Login here</a></span></p> 
+
+</div>
+
+<canvas class="background"></canvas>
+{% endblock %}
+    

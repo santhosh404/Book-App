@@ -1,0 +1,98 @@
+{%extends 'base.html'%} 
+{% block title %} Django-Add Books {% endblock %} 
+{% block styles %}
+
+<style>
+  body {
+    font-family: "Poppins", sans-serif;
+  }
+  .user {
+    font-size: 20px;
+    margin: 10px auto;
+  }
+  .logout {
+    color: #dc3545 !important;
+  }
+  .viewbooks {
+    color: blue !important;
+  }
+  .nav-item .nav-link {
+    margin: auto 10px !important;
+  }
+  .cardimg {
+    height: 200px;
+  }
+  .add-head{
+    text-align: center;
+    margin: 20px auto;
+  }
+</style>
+
+{% endblock %} {% block body %} 
+<h1></h1>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="{% url 'home' %}"
+      >Welcome {{user.username}}!</a
+    >
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mb-2 mb-lg-0 ms-auto">
+        <li class="nav-item">
+          <a class="nav-link viewbooks" href="{% url 'home' %}">View Books</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link logout" href="{% url 'logout' %}">Logout</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<h1 class="add-head">Add Books of Your Intrests!</h1>
+
+<div class="container" style="margin: auto">
+  {% if email_error %}
+    <div class="alert alert-danger" role="alert">{{email_error}}</div>
+  {% endif %}
+    <form method="POST">
+      {% csrf_token %}
+      <div class="row">
+        <div class="col">
+          <input type="email" class="form-control" placeholder="Email"  name="email" required/>
+        </div>
+        <div class="col">
+          <input type="text" class="form-control" placeholder="Book name" name="book" required/>
+        </div>
+      </div>
+    
+
+    <div class="form-group mt-3">
+      
+      <textarea
+        class="form-control"
+        id="exampleFormControlTextarea1"
+        rows="3"
+        placeholder="Description"
+        name="description"
+        required
+      ></textarea>
+    </div>
+    <button type="submit" class="btn btn-primary float-end mt-3">Add Book</button>
+  </form>
+</div>
+
+{% endblock %}
+
+
+

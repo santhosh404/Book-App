@@ -1,0 +1,118 @@
+{%extends 'base.html'%}
+
+{% block title %} Django-Home {% endblock %}
+
+{% block styles %}
+
+<style>
+body {
+    font-family: "Poppins", sans-serif;
+  }
+.user{
+    font-size: 20px;
+    margin: 10px auto;
+  }
+  .logout{
+    color: #dc3545 !important;
+  }
+  .addbooks{
+    color: blue !important;
+  }
+  .nav-item .nav-link{
+    margin: auto 10px !important;
+  }
+  .cardimg{
+    height: 200px;
+  }
+  .delete{
+    text-decoration: none;
+    color: black;
+  }
+  .delete:hover{
+    color: red;
+  }
+  .Edit{
+    text-decoration: none;
+    color: black;
+  }
+  .Edit:hover{
+    color: blue;
+  }
+  .norecords{
+    text-align: center;
+    font-size: large;
+    margin: 20px auto;
+  }
+  .carddesc{
+    text-align: justify;
+  }
+</style>
+
+
+{% endblock %}
+{% block body %} 
+
+<h4 class="user"></h4>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="{% url 'home' %}">Welcome {{user.username}}!</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mb-2 mb-lg-0 ms-auto">
+        <li class="nav-item">
+          <a class="nav-link addbooks" href="{% url 'addbooks' %}">Add Books</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link logout" href="{% url 'logout' %}">Logout</a>
+        </li>
+       
+      </ul>
+    </div>
+  </div>
+</nav>
+
+
+
+<div class="container">
+  <div class="row">
+    {% for i in record %}
+    <div class="col-lg-3 col-md-4 col-sm-6 mt-4">
+      
+      <div class="card text-center h-100 mt-4">
+        <div class="card-header">
+
+          <span><a href="{% url 'update_event' i.id %}" class="Edit float-start"> <ion-icon name="create-outline"></ion-icon></a></span> 
+         
+          {{i.Book}}
+
+          <span><a href="{% url 'delete_event' i.id %}" class="delete float-end"><ion-icon name="trash-outline"></ion-icon></a></span> 
+         
+        </div>
+        <div class="card-body">
+          
+          <p class="card-text carddesc">{{i.Description}}</p>
+        </div>
+      </div>
+    
+      
+    </div>
+    {% endfor %}
+  </div>
+</div>
+
+
+
+<p class="norecords">{% if empty %}
+  {{empty}}
+  {% endif %}</p>
+
+
+
+
+
+
+{% endblock %}
+
+
